@@ -13,6 +13,8 @@
 - **强化学习**: 投资组合优化、交易策略学习
 - **最新论文模型**: 稀疏VAE、贝叶斯深度学习等
 
+如果你主要用 Python，请先看 [Python 快速开始](docs/python-quickstart.md)；如果你主要用 Stata，请看 [Stata 联动工作流](docs/stata-workflow.md)。
+
 ## 核心特性
 
 ✅ **开箱即用** - 只需修改数据路径就能直接运行  
@@ -23,34 +25,13 @@
 
 ## 快速开始
 
-### 安装
+请按你的主路线阅读：
 
-**方式1: 从源代码安装**
+1. Python 用户看 [docs/python-quickstart.md](docs/python-quickstart.md)
+2. Stata 用户看 [docs/stata-workflow.md](docs/stata-workflow.md)
+3. 想看总目录先看 [docs/README.md](docs/README.md)
 
-```bash
-# 克隆项目
-git clone https://github.com/yourusername/econometricsml.git
-cd econometricsml
-
-# 创建虚拟环境（推荐）
-python -m venv venv
-source venv/bin/activate  # Windows: venv\\Scripts\\activate
-
-# 安装依赖
-pip install -e .
-
-# 安装可选依赖（机器学习）
-pip install -e ".[ml]"
-
-# 安装可选依赖（强化学习）
-pip install -e ".[rl]"
-```
-
-**方式2: 使用pip安装**
-
-```bash
-pip install econometricsml
-```
+如果你想先试一个最小例子，可以从下面的 Python 示例开始。
 
 ### 最小示例
 
@@ -100,17 +81,18 @@ econometricsml/
 │       ├── evaluation.py            # 模型评估
 │       └── __init__.py
 ├── examples/                         # 完整示例代码
-│   ├── 01_ols_regression.py
-│   ├── 02_var_forecasting.py
-│   ├── 03_garch_volatility.py
-│   ├── 04_ensemble_prediction.py
+│   ├── README.md                     # Python 示例索引
+│   ├── 01_ols_regression.py          # OLS 回归示例
+│   ├── 02_var_forecasting.py         # VAR 时间序列预测示例
+│   ├── 03_garch_volatility.py        # GARCH 波动率预测示例
+│   ├── 04_ensemble_prediction.py     # 集成模型预测示例
 │   └── 05_portfolio_optimization.py
-├── tutorials/                        # 详细教程
-│   ├── 01_introduction.ipynb
-│   ├── 02_econometric_models.ipynb
-│   ├── 03_machine_learning.ipynb
-│   └── 04_reinforcement_learning.ipynb
-├── docs/                             # 完整文档
+├── tutorials/                        # Python 教程
+│   └── README.md                     # Python 教程索引
+├── docs/                             # 文档总目录
+│   ├── README.md                     # 路线总览
+│   ├── python-quickstart.md          # Python 快速开始
+│   └── stata-workflow.md             # Stata 联动工作流
 ├── tests/                            # 单元测试
 ├── data/                             # 数据示例
 ├── README.md                         # 本文件
@@ -454,61 +436,6 @@ y = np.random.randn(100)
 ts_data = np.random.randn(200, 3)  # 200个观测，3个变量
 ```
 
-### Stata联动格式
-
-如果你的数据清洗或实证回归主要在 Stata 中完成，可以用 CSV 或 `.dta` 在 Python 和 Stata 之间往返。
-
-```python
-import numpy as np
-import pandas as pd
-
-# 1. 在Python中准备或清洗数据
-df = pd.DataFrame({
-    'firmid': [1, 1, 2, 2],
-    'year': [2021, 2022, 2021, 2022],
-    'gdp_growth': [3.2, 3.5, 2.8, 3.1],
-    'inflation': [2.1, 2.3, 2.0, 2.2],
-    'unemployment': [5.0, 4.8, 5.4, 5.1],
-})
-
-# 2. 导出给Stata
-df.to_csv('data/macro_panel.csv', index=False)
-df.to_stata('data/macro_panel.dta', write_index=False)
-
-# 3. 回到Python继续建模
-X = df[['inflation', 'unemployment']].values
-y = df['gdp_growth'].values
-```
-
-```stata
-* 4. 在Stata中读取Python导出的数据
-use "data/macro_panel.dta", clear
-* 或者：import delimited "data/macro_panel.csv", clear varnames(1) encoding(utf8)
-
-* 5. 查看数据
-describe
-summarize gdp_growth inflation unemployment
-
-* 6. 跑一个基准OLS回归
-reg gdp_growth inflation unemployment
-estimates store ols_base
-
-* 7. 如果是面板数据，继续做固定效应
-xtset firmid year
-xtreg gdp_growth inflation unemployment, fe
-
-* 8. 也可以把结果导出为表格继续分析
-estimates table ols_base, b(%9.4f) se stats(N r2_a)
-```
-
-```python
-import pandas as pd
-
-# 9. 将Stata分析后的结果或整理后的数据再导回Python
-result_df = pd.read_stata('data/macro_panel.dta')
-result_df.to_csv('data/macro_panel_roundtrip.csv', index=False)
-```
-
 ## 安装可选依赖
 
 ### 使用TensorFlow/PyTorch
@@ -551,16 +478,11 @@ df = load_csv_data('data/your_file.csv')
 
 ### Q: 怎么和 Stata 配合使用？
 
-A: 推荐先在 Python 中清洗数据，再导出 `.dta` 给 Stata：
-```python
-df.to_stata('data/your_file.dta', write_index=False)
-```
-在 Stata 中：
-```stata
-use "data/your_file.dta", clear
-reg y x1 x2
-```
-如果你需要回到 Python 做机器学习评估，也可以再用 `pandas.read_stata()` 读回来。
+A: 直接看 [Stata 联动工作流](docs/stata-workflow.md)。那里把 Python 清洗、`.dta` 导出和 Stata 回归拆开讲了。
+
+### Q: 从哪里看总目录？
+
+A: 看 [docs/README.md](docs/README.md)，里面把 Python 路线和 Stata 路线分开了。
 
 ### Q: 如何扩展库（添加新模型）？
 

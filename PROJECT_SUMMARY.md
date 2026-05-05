@@ -234,7 +234,13 @@ git push -u origin main
   - 超参数调优管道
   - 模型解释工具（SHAP、LIME）
 
-- [ ] 补充 Stata 联动工作流
+- [ ] 完善 Python 新手入门文档
+   - Windows 安装 Python
+   - Jupyter / PyCharm 使用说明
+   - 文档总目录和示例索引
+
+- [ ] 完善 Stata 联动工作流
+   - 独立的 Stata 说明文档
    - Python 清洗后导出 `.dta`
    - Stata 回归、面板分析、结果导出
    - 结果回流 Python 做机器学习和可视化

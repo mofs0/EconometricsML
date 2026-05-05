@@ -9,12 +9,10 @@
 git clone https://github.com/yourusername/econometricsml.git
 cd econometricsml
 
-# 创建虚拟环境
-python -m venv venv
-source venv/bin/activate  # Windows: venv\Scripts\activate
-
-# 安装库
-pip install -e .
+# Windows 用户建议先看 [Python 快速开始](docs/python-quickstart.md)
+py --version
+py -m pip install -U pip
+py -m pip install -e .
 ```
 
 ### 2. 最简单的例子
@@ -158,29 +156,7 @@ python examples/04_ensemble_prediction.py
 
 ## Stata 联动
 
-如果你的主力回归在 Stata 中完成，可以把数据先从 Python 导出，再在 Stata 里继续实证：
-
-```python
-import pandas as pd
-
-df.to_stata('data/macro_panel.dta', write_index=False)
-```
-
-```stata
-use "data/macro_panel.dta", clear
-describe
-reg y x1 x2
-xtset firmid year
-xtreg y x1 x2, fe
-```
-
-如果需要把 Stata 处理后的数据再交回 Python：
-
-```python
-import pandas as pd
-
-df = pd.read_stata('data/macro_panel.dta')
-```
+如果你的主力回归在 Stata 中完成，请直接看 [Stata 联动工作流](docs/stata-workflow.md)。
 
 ## 常见问题
 
@@ -253,9 +229,9 @@ X_test = X[train_size:]
 
 ## 后续学习
 
-- **详细教程**：查看 `tutorials/` 目录的Jupyter笔记本
-- **API文档**：查看 `docs/` 目录
-- **更多示例**：查看 `examples/` 目录
+- **详细教程**：查看 [tutorials/README.md](tutorials/README.md)
+- **API文档**：查看 [docs/README.md](docs/README.md)
+- **更多示例**：查看 [examples/README.md](examples/README.md)
 - **理论基础**：
   - [OLS回归](https://en.wikipedia.org/wiki/Ordinary_least_squares)
   - [VAR模型](https://en.wikipedia.org/wiki/Vector_autoregression)
@@ -273,7 +249,8 @@ X_test = X[train_size:]
 - [ ] 克隆/fork项目
 - [ ] 安装依赖
 - [ ] 运行示例代码
-- [ ] 测试 Stata 联动流程
+- [ ] 按 Python 路线完成首次安装
+- [ ] 按 Stata 路线完成数据往返
 - [ ] 用自己的数据测试
 - [ ] 阅读详细文档
 - [ ] 贡献改进建议
