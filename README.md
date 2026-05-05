@@ -57,6 +57,30 @@ print(f"系数: {summary['coefficients']}")
 y_pred = model.predict(X[:10])
 ```
 
+## 运行入口
+
+### 按脚本快速试跑
+
+- 统一示例索引看 [examples/README.md](examples/README.md)
+- 计量经济学示例看 [examples/econometrics/](examples/econometrics/)
+- 机器学习示例看 [examples/ml/](examples/ml/)
+- 深度学习示例看 [examples/deep_learning/](examples/deep_learning/)
+- 强化学习示例看 [examples/rl/](examples/rl/)
+
+### 按 Notebook 学习
+
+- 教程总目录看 [tutorials/README.md](tutorials/README.md)
+- 如果你想先看一组家族教程，可以从 `05_econometrics_family.ipynb` 开始，再按数字递增阅读。
+
+### 直接运行示例
+
+```powershell
+python examples/econometrics/01_OLS.py
+python examples/ml/01_LinearRegression.py
+python examples/deep_learning/01_MLP.py
+python examples/rl/01_Q_learning.py
+```
+
 ## 项目结构
 
 ```
