@@ -12,9 +12,23 @@ Contains classical econometric models including:
 from .ols import OLSRegression
 from .var import VARModel
 from .garch import GARCHModel
+from .extended import (
+    DifferenceInDifferences,
+    FixedEffectsRegression,
+    IVRegression,
+    LogitRegression,
+    ProbitRegression,
+    RandomEffectsRegression,
+)
 
 __all__ = [
     "OLSRegression",
     "VARModel",
     "GARCHModel",
+    "IVRegression",
+    "FixedEffectsRegression",
+    "RandomEffectsRegression",
+    "DifferenceInDifferences",
+    "LogitRegression",
+    "ProbitRegression",
 ]

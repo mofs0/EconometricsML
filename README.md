@@ -15,6 +15,13 @@
 
 如果你主要用 Python，请先看 [Python 快速开始](docs/python-quickstart.md)；如果你主要用 Stata，请看 [Stata 联动工作流](docs/stata-workflow.md)。
 
+当前核心库已经补充了更多可直接导出的模型类：
+
+- 计量经济学：IV、固定效应、随机效应、DiD、Logit、Probit
+- 机器学习：Ridge、Lasso、随机森林、梯度提升、SVM、KNN、KMeans、PCA、Logistic、XGBoost
+- 深度学习：Deep MLP、1D CNN、RNN、Transformer、自编码器
+- 强化学习：Q-learning、SARSA、DQN、PPO、A2C
+
 ## 核心特性
 
 ✅ **开箱即用** - 只需修改数据路径就能直接运行  
