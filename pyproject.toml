@@ -1,0 +1,90 @@
+[build-system]
+requires = ["setuptools>=65.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "econometricsml"
+version = "0.1.0"
+description = "A comprehensive Python library for econometric and financial machine learning models"
+readme = "README.md"
+license = {text = "MIT"}
+authors = [
+    {name = "Your Name", email = "your.email@example.com"}
+]
+requires-python = ">=3.8"
+keywords = [
+    "econometrics",
+    "finance",
+    "machine-learning",
+    "time-series",
+    "statistics",
+    "deep-learning",
+    "reinforcement-learning"
+]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "Intended Audience :: Science/Research",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Scientific/Engineering",
+    "Topic :: Office/Business :: Financial",
+]
+
+dependencies = [
+    "numpy>=1.21.0",
+    "pandas>=1.3.0",
+    "scipy>=1.7.0",
+    "scikit-learn>=1.0.0",
+    "statsmodels>=0.13.0",
+    "matplotlib>=3.4.0",
+    "seaborn>=0.11.0",
+    "tqdm>=4.60.0",
+]
+
+[project.optional-dependencies]
+ml = [
+    "tensorflow>=2.10.0",
+    "torch>=1.10.0",
+    "xgboost>=1.5.0",
+    "lightgbm>=3.3.0",
+]
+rl = [
+    "gym>=0.21.0",
+    "stable-baselines3>=1.6.0",
+]
+dev = [
+    "pytest>=7.0.0",
+    "pytest-cov>=3.0.0",
+    "black>=22.0.0",
+    "flake8>=4.0.0",
+    "isort>=5.10.0",
+    "sphinx>=4.5.0",
+    "sphinx-rtd-theme>=1.0.0",
+]
+
+[project.urls]
+Homepage = "https://github.com/yourusername/econometricsml"
+Documentation = "https://econometricsml.readthedocs.io"
+Repository = "https://github.com/yourusername/econometricsml.git"
+Issues = "https://github.com/yourusername/econometricsml/issues"
+
+[tool.setuptools]
+packages = ["econml", "econml.econometric_models", "econml.ml_models", "econml.rl_models", "econml.utils"]
+
+[tool.black]
+line-length = 100
+target-version = ['py38', 'py39', 'py310', 'py311']
+
+[tool.isort]
+profile = "black"
+line_length = 100
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = ["test_*.py"]
