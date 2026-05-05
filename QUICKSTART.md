@@ -156,6 +156,32 @@ python examples/03_garch_volatility.py
 python examples/04_ensemble_prediction.py
 ```
 
+## Stata 联动
+
+如果你的主力回归在 Stata 中完成，可以把数据先从 Python 导出，再在 Stata 里继续实证：
+
+```python
+import pandas as pd
+
+df.to_stata('data/macro_panel.dta', write_index=False)
+```
+
+```stata
+use "data/macro_panel.dta", clear
+describe
+reg y x1 x2
+xtset firmid year
+xtreg y x1 x2, fe
+```
+
+如果需要把 Stata 处理后的数据再交回 Python：
+
+```python
+import pandas as pd
+
+df = pd.read_stata('data/macro_panel.dta')
+```
+
 ## 常见问题
 
 ### Q: 导入错误怎么办？
@@ -247,6 +273,7 @@ X_test = X[train_size:]
 - [ ] 克隆/fork项目
 - [ ] 安装依赖
 - [ ] 运行示例代码
+- [ ] 测试 Stata 联动流程
 - [ ] 用自己的数据测试
 - [ ] 阅读详细文档
 - [ ] 贡献改进建议

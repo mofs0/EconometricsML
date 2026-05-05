@@ -454,6 +454,61 @@ y = np.random.randn(100)
 ts_data = np.random.randn(200, 3)  # 200个观测，3个变量
 ```
 
+### Stata联动格式
+
+如果你的数据清洗或实证回归主要在 Stata 中完成，可以用 CSV 或 `.dta` 在 Python 和 Stata 之间往返。
+
+```python
+import numpy as np
+import pandas as pd
+
+# 1. 在Python中准备或清洗数据
+df = pd.DataFrame({
+    'firmid': [1, 1, 2, 2],
+    'year': [2021, 2022, 2021, 2022],
+    'gdp_growth': [3.2, 3.5, 2.8, 3.1],
+    'inflation': [2.1, 2.3, 2.0, 2.2],
+    'unemployment': [5.0, 4.8, 5.4, 5.1],
+})
+
+# 2. 导出给Stata
+df.to_csv('data/macro_panel.csv', index=False)
+df.to_stata('data/macro_panel.dta', write_index=False)
+
+# 3. 回到Python继续建模
+X = df[['inflation', 'unemployment']].values
+y = df['gdp_growth'].values
+```
+
+```stata
+* 4. 在Stata中读取Python导出的数据
+use "data/macro_panel.dta", clear
+* 或者：import delimited "data/macro_panel.csv", clear varnames(1) encoding(utf8)
+
+* 5. 查看数据
+describe
+summarize gdp_growth inflation unemployment
+
+* 6. 跑一个基准OLS回归
+reg gdp_growth inflation unemployment
+estimates store ols_base
+
+* 7. 如果是面板数据，继续做固定效应
+xtset firmid year
+xtreg gdp_growth inflation unemployment, fe
+
+* 8. 也可以把结果导出为表格继续分析
+estimates table ols_base, b(%9.4f) se stats(N r2_a)
+```
+
+```python
+import pandas as pd
+
+# 9. 将Stata分析后的结果或整理后的数据再导回Python
+result_df = pd.read_stata('data/macro_panel.dta')
+result_df.to_csv('data/macro_panel_roundtrip.csv', index=False)
+```
+
 ## 安装可选依赖
 
 ### 使用TensorFlow/PyTorch
@@ -493,6 +548,19 @@ A: 将CSV文件放在 `data/` 目录，然后：
 from econml.utils import load_csv_data
 df = load_csv_data('data/your_file.csv')
 ```
+
+### Q: 怎么和 Stata 配合使用？
+
+A: 推荐先在 Python 中清洗数据，再导出 `.dta` 给 Stata：
+```python
+df.to_stata('data/your_file.dta', write_index=False)
+```
+在 Stata 中：
+```stata
+use "data/your_file.dta", clear
+reg y x1 x2
+```
+如果你需要回到 Python 做机器学习评估，也可以再用 `pandas.read_stata()` 读回来。
 
 ### Q: 如何扩展库（添加新模型）？
 
