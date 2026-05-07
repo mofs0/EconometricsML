@@ -78,6 +78,7 @@ target/
 # 但允许 examples 和 tutorials 中的 notebook 被版本控制
 !examples/**/*.ipynb
 !tutorials/**/*.ipynb
+!notebooks/**/*.ipynb
 
 # IPython
 profile_default/
