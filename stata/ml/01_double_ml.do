@@ -112,4 +112,5 @@ elasticnet linear d x1-x10, selection(cv) rseed(42) alpha(0.5)
 predict double dhat_en, xb
 gen double d_tilde_en = d - dhat_en
 
-reg y_ti
+reg y_tilde_en d_tilde_en, robust noconstant
+display "ElasticNet DML: 处理效应 = " _b[d_tilde_en] "  (真实值=1.5)"

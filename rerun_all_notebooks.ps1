@@ -27,4 +27,31 @@ Write-Host "=== Re-executing traditional notebooks with Windows fonts ===" -Fore
 $notebooks = Get-ChildItem "$NB_DIR\T*.ipynb" | Sort-Object Name
 foreach ($nb in $notebooks) {
     Write-Host "  Executing: $($nb.Name) ..." -ForegroundColor Yellow
-    & $PYTHON -m nbcon
+    & $PYTHON -m nbconvert --to notebook --execute --inplace `
+        --ExecutePreprocessor.timeout=300 `
+        $nb.FullName
+    if ($LASTEXITCODE -eq 0) {
+        Write-Host "    OK" -ForegroundColor Green
+    } else {
+        Write-Host "    FAILED (exit $LASTEXITCODE)" -ForegroundColor Red
+    }
+}
+
+# ── Step 3: commit & push academic branch ────────────────────────────────────
+Write-Host ""
+Write-Host "=== Committing and pushing academic branch ===" -ForegroundColor Cyan
+git add -A
+git commit -m "re-execute T* notebooks with Windows fonts (Microsoft YaHei)" --allow-empty
+git push origin academic
+
+# ── Step 4: merge academic -> main and push main ──────────────────────────────
+Write-Host ""
+Write-Host "=== Merging academic into main and pushing ===" -ForegroundColor Cyan
+git checkout main
+git pull origin main --rebase          # sync with remote first to avoid rejection
+git merge academic --no-ff -m "merge academic: A01-A07 paper writing guide + CJK font fixes"
+git push origin main
+
+Write-Host ""
+Write-Host "=== All done! ===" -ForegroundColor Green
+Write-Host "Both 'main' and 'academic' are now up to date on GitHub." -ForegroundColor Green
