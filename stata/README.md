@@ -33,4 +33,4 @@
 ## 版本要求
 
 - Stata 16+（部分 ML 方法需要 Stata 17+ 内置 lasso）
-- 推荐安装：`ivreg2`、`estout`、`coefplot`、`reghdfe`、`ppmlhdfe`
+- 推荐安装：`ivreg2`、`estout`、`
