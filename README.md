@@ -360,4 +360,5 @@ A：需要用 Git 切换分支（`git checkout academic`）。如果你只下载
 
 ## 12. 许可证
 
-MIT License（学术与个人非商业使用）
+
+本项目采用 [MIT License](LICENSE) 开源协议。
