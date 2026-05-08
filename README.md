@@ -9,6 +9,119 @@
 
 ---
 
+## 🙋 第一次来？先看这里！
+
+**不懂 Python？没用过 GitHub？完全没关系，按下面的步骤一步一步来就行。**
+
+本项目专为经济/金融/商科的同学设计，**不需要编程基础**也能跑起来。如果你是完全的新手，建议先去看本仓库的 Python 入门教学（见下方 `python_tutorial/` 文件夹），再回来使用这里的代码模板。
+
+---
+
+## 🚀 从零开始：环境配置教程
+
+### 第一步：安装 Python
+
+1. 打开 [https://www.python.org/downloads/](https://www.python.org/downloads/)
+2. 点击黄色大按钮 **Download Python 3.x.x**（选最新版本即可）
+3. 运行安装包，**务必勾选底部的 `Add Python to PATH`**，然后点 Install Now
+
+> ✅ 验证安装成功：打开命令提示符（Windows 按 `Win+R` 输入 `cmd` 回车），输入 `python --version`，能看到版本号就成功了。
+
+---
+
+### 第二步：下载本项目代码
+
+**方式 A（推荐新手）：直接下载 ZIP 压缩包**
+
+1. 进入本仓库主页（你现在看的这个页面）
+2. 点击右上角绿色按钮 **`Code`**
+3. 点击 **`Download ZIP`**
+4. 解压到你喜欢的文件夹，比如 `D:\EconometricsML`
+
+**方式 B：用 Git 克隆（如果你已经装了 Git）**
+
+```bash
+git clone https://github.com/你的用户名/EconometricsML.git
+cd EconometricsML
+```
+
+---
+
+### 第三步：安装依赖包
+
+打开命令提示符，进入你解压/克隆的文件夹（把路径换成你自己的）：
+
+```bash
+# 进入项目文件夹（把路径换成你自己的）
+cd D:\EconometricsML
+
+# 安装所有依赖包（等待几分钟，国内网络慢可以换镜像，见下方提示）
+pip install -r requirements.txt
+
+# 安装本项目自身的包
+pip install -e .
+```
+
+> 💡 **网速慢？用国内镜像加速：**
+> ```bash
+> pip install -r requirements.txt -i https://pypi.tuna.tsinghua.edu.cn/simple
+> ```
+
+---
+
+### 第四步：打开 Jupyter Notebook 运行示例
+
+本项目的示例都是 `.ipynb` 格式（Jupyter Notebook），可以像 Word 一样边看说明边运行代码。
+
+```bash
+# 在项目目录下运行
+jupyter notebook
+```
+
+浏览器会自动打开，进入 `notebooks/traditional/` 文件夹，点开任意一个 `.ipynb` 文件，按 **`Shift + Enter`** 逐格运行代码。
+
+> 💡 **如果提示 `jupyter` 命令找不到：**
+> ```bash
+> pip install notebook
+> ```
+
+---
+
+### 第五步：运行一个最简单的示例验证一切正常
+
+```bash
+# 在命令提示符中运行（在项目目录下）
+python empirlab/traditional/ols.py
+```
+
+看到一张回归结果表格，就说明环境配置完全成功 🎉
+
+---
+
+## 🐍 Python 入门教学（专为本项目定制）
+
+**第一次接触 Python？** 我们在 `python_tutorial/` 文件夹中准备了一套专门为本项目定制的 Python 入门教程，内容紧贴经济/金融实证场景，学完就能直接用本项目的代码。
+
+```text
+python_tutorial/
+├── P00_写在前面_如何使用本教程.ipynb       # 教程导读，必看
+├── P01_Python基础_变量与数据类型.ipynb     # 数字、字符串、列表、字典
+├── P02_Python基础_条件与循环.ipynb         # if/for/while
+├── P03_Python基础_函数与模块.ipynb         # def、import 用法
+├── P04_数据处理_NumPy数组.ipynb            # 矩阵运算基础
+├── P05_数据处理_Pandas表格操作.ipynb       # 读取/清洗数据，最常用！
+├── P06_数据可视化_Matplotlib画图.ipynb     # 折线图、散点图、直方图
+├── P07_统计基础_描述性统计与假设检验.ipynb  # 均值、方差、t检验
+└── P08_实战演练_用Python复现一篇实证论文.ipynb  # 综合案例
+```
+
+> 📌 **学习路径建议：**
+> - 完全零基础：P00 → P01 → P02 → P03 → P05 → 直接看 notebooks/
+> - 有一点基础（会 Excel）：P04 → P05 → P06 → 直接看 notebooks/
+> - 只想跑通代码：看完 P03 就够了
+
+---
+
 ## 1. 仓库定位
 
 - **`main` 分支**：可复用、可审计、可扩展的实证研究代码模板（传统计量 + ML + DL + RL + LLM）
@@ -20,6 +133,17 @@
 
 ```text
 EconometricsML/
+├── python_tutorial/             # 🆕 Python 入门教程（专为本项目定制，新手必看）
+│   ├── P00_写在前面_如何使用本教程.ipynb
+│   ├── P01_Python基础_变量与数据类型.ipynb
+│   ├── P02_Python基础_条件与循环.ipynb
+│   ├── P03_Python基础_函数与模块.ipynb
+│   ├── P04_数据处理_NumPy数组.ipynb
+│   ├── P05_数据处理_Pandas表格操作.ipynb
+│   ├── P06_数据可视化_Matplotlib画图.ipynb
+│   ├── P07_统计基础_描述性统计与假设检验.ipynb
+│   └── P08_实战演练_用Python复现一篇实证论文.ipynb
+│
 ├── empirlab/                    # Python 包（核心方法库）
 │   ├── traditional/             # 经典计量方法
 │   │   ├── ols.py               ✅ 完整推断（SE/t/p/F/HC1/adj-R²）
@@ -64,11 +188,11 @@ EconometricsML/
 ├── academic/                    # 论文写作系列（academic 分支）
 │   ├── A01_文献检索与高效阅读.ipynb
 │   ├── A02_选题与开题报告.ipynb
-│   ├── A03_期刊选择与投稿.ipynb    # 含 SCI/SSCI/CSSCI/北大核心/普刊
+│   ├── A03_期刊选择与投稿.ipynb
 │   ├── A04_SCI小论文写作全指南.ipynb
 │   ├── A05_毕业大论文.ipynb
-│   ├── A06_学术裁缝写作方法.ipynb  # 情境迁移/机制叠加/测度改进/异质性扩展
-│   └── A07_数据获取服务.ipynb      # 联系：1795837192@qq.com
+│   ├── A06_学术裁缝写作方法.ipynb
+│   └── A07_数据获取服务.ipynb
 │
 ├── stata/
 │   ├── traditional/
@@ -84,11 +208,13 @@ EconometricsML/
 
 ## 3. 快速开始
 
+> 💡 **如果你是第一次使用，请先看上方"从零开始：环境配置教程"，再来看这里。**
+
 ```bash
 pip install -r requirements.txt
 pip install -e .
 
-# 直接运行最小示例（无需额外数据）
+# 直接运行最小示例（无需额外数据，可以验证环境是否正常）
 python empirlab/traditional/ols.py
 python empirlab/ml/double_ml.py
 python empirlab/dl/mlp_regressor.py
@@ -158,12 +284,32 @@ print(model.summary())
 | A07 | 数据获取服务 | A 股/宏观/债券/基金数据范围介绍，联系：1795837192@qq.com |
 
 ```bash
+# 切换到 academic 分支（需要先安装 Git）
 git checkout academic
 ```
 
 ---
 
-## 7. 代码规范
+## 7. 常见问题 FAQ
+
+**Q：运行时提示 `ModuleNotFoundError: No module named 'xxx'`**
+A：说明某个包没装上，运行 `pip install xxx` 即可（把 xxx 换成报错里的包名）。
+
+**Q：`pip install` 速度很慢或超时**
+A：换清华镜像源：`pip install xxx -i https://pypi.tuna.tsinghua.edu.cn/simple`
+
+**Q：打开 Jupyter Notebook 后，运行代码报错 `Kernel died`**
+A：多半是内存不足或包版本冲突，重启内核（菜单栏 Kernel → Restart）再试一次。
+
+**Q：我不会用 Git，能不能不用 Git？**
+A：完全可以。直接下载 ZIP 压缩包即可，参考上方"第二步：下载本项目代码"方式 A。
+
+**Q：academic 分支的内容在哪里？**
+A：需要用 Git 切换分支（`git checkout academic`）。如果你只下载了 ZIP，建议重新下载时在 GitHub 页面切换到 `academic` 分支再下载。
+
+---
+
+## 8. 代码规范
 
 详见 [`.github/copilot-instructions.md`](.github/copilot-instructions.md)。核心约束：
 
@@ -174,7 +320,7 @@ git checkout academic
 
 ---
 
-## 8. Stata 对应
+## 9. Stata 对应
 
 | Python | Stata | 状态 |
 |--------|-------|------|
@@ -184,7 +330,7 @@ git checkout academic
 
 ---
 
-## 9. 其他学科（预留，未开发）
+## 10. 其他学科（预留，未开发）
 
 架构已预留以下学科的扩展入口：
 
@@ -198,7 +344,7 @@ git checkout academic
 
 ---
 
-## 10. 法律声明
+## 11. 法律声明
 
 本仓库内容（代码、Notebook、文档）仅供**学术交流与学习使用**。
 
@@ -212,6 +358,6 @@ git checkout academic
 
 ---
 
-## 11. 许可证
+## 12. 许可证
 
 MIT License（学术与个人非商业使用）
