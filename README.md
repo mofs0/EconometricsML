@@ -1,7 +1,7 @@
 # EconometricsML
 
-> **Reusable empirical research code templates for economics · finance · business**
-> Python package: `empirlab` | 面向经济 / 金融 / 商科的实证研究代码库
+> **面向经济 / 金融 / 商科学生的计量经济学实证代码库**
+> 传统计量方法（OLS/DID/IV/RD/PSM）· 论文写作全流程指南 · Python 入门教程
 
 ---
 
