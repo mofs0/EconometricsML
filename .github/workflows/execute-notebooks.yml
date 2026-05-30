@@ -28,9 +28,14 @@ jobs:
 
       - name: Execute notebooks (nbconvert)
         run: |
-          find examples -name "*.ipynb" | while read nb; do
-            jupyter nbconvert --to notebook --execute "$nb" --inplace --ExecutePreprocessor.timeout=600
-          done
+          notebooks=$(find examples -name "*.ipynb" 2>/dev/null)
+          if [ -n "$notebooks" ]; then
+            echo "$notebooks" | while read nb; do
+              jupyter nbconvert --to notebook --execute "$nb" --inplace --ExecutePreprocessor.timeout=600
+            done
+          else
+            echo "No .ipynb files found in examples/, skipping."
+          fi
 
       - name: Commit executed notebooks
         env:
